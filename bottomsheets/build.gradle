@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply from: '../dependencies.gradle'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.squeezymo'
 
 ext.shard = 'bottomsheets'
 apply from: '../bintrayconfig.gradle'
