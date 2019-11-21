@@ -70,13 +70,20 @@ class DialogActionButton(
 
     // Text color
     val isLightTheme = inferThemeIsLight(appContext)
-    enabledColor = resolveColor(appContext, attr = R.attr.md_color_button_text) {
-      resolveColor(appContext, attr = R.attr.colorPrimary)
+
+    if (enabledColor == 0) {
+      enabledColor = resolveColor(appContext, attr = R.attr.md_color_button_text) {
+        resolveColor(appContext, attr = R.attr.colorPrimary)
+      }
     }
-    val disabledColorRes =
-      if (isLightTheme) R.color.md_disabled_text_light_theme
-      else R.color.md_disabled_text_dark_theme
-    disabledColor = resolveColor(baseContext, res = disabledColorRes)
+
+    if (disabledColor == 0) {
+      val disabledColorRes =
+        if (isLightTheme) R.color.md_disabled_text_light_theme
+        else R.color.md_disabled_text_dark_theme
+      disabledColor = resolveColor(baseContext, res = disabledColorRes)
+    }
+
     setTextColor(enabledColor)
 
     // Selector

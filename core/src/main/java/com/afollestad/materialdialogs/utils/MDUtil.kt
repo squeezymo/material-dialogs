@@ -208,14 +208,24 @@ object MDUtil {
   @RestrictTo(LIBRARY_GROUP) fun TextView?.maybeSetTextColor(
     context: Context,
     @AttrRes attrRes: Int?,
-    @AttrRes hintAttrRes: Int? = null
+    @AttrRes hintAttrRes: Int? = null,
+    @ColorInt color: Int? = null,
+    @ColorInt hintColor: Int? = null
   ) {
-    if (this == null || (attrRes == null && hintAttrRes == null)) return
-    if (attrRes != null) {
+    if (this == null || (attrRes == null && hintAttrRes == null && color == null && hintColor == null)) return
+
+    if (color != null) {
+      setTextColor(color)
+    }
+    else if (attrRes != null) {
       resolveColor(context, attr = attrRes)
           .ifNotZero(this::setTextColor)
     }
-    if (hintAttrRes != null) {
+
+    if (hintColor != null) {
+      setHintTextColor(hintColor)
+    }
+    else if (hintAttrRes != null) {
       resolveColor(context, attr = hintAttrRes)
           .ifNotZero(this::setHintTextColor)
     }
